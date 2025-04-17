@@ -1,12 +1,14 @@
 package pages;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 public class RegisterPage extends BasePage {
-    WebDriver driver;
 
     @FindBy(id = "firstname")
     WebElement firstNameInput;
@@ -33,6 +35,7 @@ public class RegisterPage extends BasePage {
 
     public void register(String firstName, String lastName, String userName, String Password) throws InterruptedException{
         waitForVisibility(firstNameInput);
+        scrollintoview(firstNameInput);
         firstNameInput.sendKeys(firstName);
         lastNameInput.sendKeys(lastName);
         userNameInput.sendKeys(userName);
@@ -42,5 +45,19 @@ public class RegisterPage extends BasePage {
         Thread.sleep(10000);
         registerButton.click();
 
+    }
+
+    public void alert(){
+       try {
+           Alert alert = driver.switchTo().alert();
+           String alerttext = alert.getText();
+           Assert.assertTrue(alerttext.contains("User Register Successfully"));
+           System.out.println("Registration completed successfully");
+           alert.accept();
+       }
+       catch (NoAlertPresentException e){
+           System.out.println("No alert present");
+           Assert.fail("Expected registration alert not found");
+       }
     }
 }

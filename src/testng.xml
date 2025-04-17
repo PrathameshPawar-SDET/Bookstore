@@ -3,7 +3,7 @@
 <suite name="BookStoreSuite" parallel="false">
     <test name="BookStoreTests">
         <classes>
-            <class name=""/>
+            <class name="tests.RegisterTest"/>
         </classes>
     </test>
 </suite>
