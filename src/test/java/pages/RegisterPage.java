@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterPage {
+public class RegisterPage extends BasePage {
     WebDriver driver;
 
     @FindBy(id = "firstname")
@@ -28,15 +28,19 @@ public class RegisterPage {
 
 
     public RegisterPage(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
+        super(driver);
     }
 
-    public void register(String firstName, String lastName, String userName, String Password){
+    public void register(String firstName, String lastName, String userName, String Password) throws InterruptedException{
+        waitForVisibility(firstNameInput);
         firstNameInput.sendKeys(firstName);
         lastNameInput.sendKeys(lastName);
         userNameInput.sendKeys(userName);
         passwordInput.sendKeys(Password);
+
+        System.out.println("Solve Captca manually...");
+        Thread.sleep(10000);
+        registerButton.click();
 
     }
 }
