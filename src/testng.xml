@@ -4,6 +4,7 @@
     <test name="BookStoreTests">
         <classes>
             <class name="tests.RegisterTest"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>
 </suite>

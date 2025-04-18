@@ -40,8 +40,6 @@ public class BookStorePage extends BasePage{
     public boolean isbookDiplayed(String bookname){
             wait.until(ExpectedConditions.visibilityOfAllElements(books));
             return booksTitle.stream().anyMatch(title -> title.getText().toLowerCase().contains(bookname.toLowerCase()));
-
     }
-
 
 }

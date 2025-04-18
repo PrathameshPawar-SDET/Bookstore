@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.testng.Assert;
 
 public class LoginPage extends BasePage {
-    WebDriver driver;
 
     @FindBy(id = "userName")
     WebElement userNameInput;
@@ -33,10 +33,15 @@ public class LoginPage extends BasePage {
         newUserButton.click();
     }
 
-    public void login(String username, String password){
+    public void login(String username, String password) throws InterruptedException{
+        scrollintoview(userNameInput);
         waitForVisibility(userNameInput);
         userNameInput.sendKeys(username);
         passwordInput.sendKeys(password);
         loginButton.click();
+        Thread.sleep(5000);
+        String currenturl = driver.getCurrentUrl();
+        Assert.assertEquals(currenturl,"https://demoqa.com/books", "Login has been failed");
+        System.out.println("Login Successfull!!!");
     }
 }
